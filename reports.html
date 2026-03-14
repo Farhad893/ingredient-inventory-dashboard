@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row g-4">
+
+  <div class="col-12">
+    <div class="card border-0 shadow-sm">
+      <div class="card-header bg-card">
+        <i class="fa-solid fa-layer-group me-2"></i> Aggregates by Category
+      </div>
+      <div class="table-responsive">
+        <table class="table table-sm table-striped table-bordered align-middle mb-0 table-reports">
+          <thead class="table-light">
+            <tr>
+              <th>Category</th>
+              <th class="text-end"># Items</th>
+              <th class="text-end">Avg Unit Price</th>
+              <th class="text-end">Avg Quality</th>
+              <th class="text-end">Total Purchase</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in by_category %}
+            <tr>
+              <td>{{ r['category'] }}</td>
+              <td class="text-end">{{ r['item_count'] }}</td>
+              <td class="text-end">{{ r['avg_unit_price']|money }}</td>
+              <td class="text-end">{{ r['avg_quality'] }}</td>
+              <td class="text-end">{{ r['total_purchase']|money }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="5" class="text-center text-muted py-4">No data</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="card border-0 shadow-sm">
+      <div class="card-header bg-card">
+        <i class="fa-solid fa-ranking-star me-2"></i> Rank by Quality (per Category)
+      </div>
+      <div class="table-responsive">
+        <table class="table table-sm table-striped table-bordered align-middle mb-0 table-reports">
+          <thead class="table-light">
+            <tr>
+              <th>Category</th>
+              <th>Rank</th>
+              <th>Material</th>
+              <th class="text-end">Quality</th>
+              <th class="text-end">Qty</th>
+              <th class="text-end">Unit Price</th>
+              <th class="text-end">Total Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in ranked %}
+            <tr>
+              <td>{{ r['category'] }}</td>
+              <td>{{ r['q_rank'] }}</td>
+              <td>{{ r['material'] }}</td>
+              <td class="text-end">{{ r['quality_index'] }}</td>
+              <td class="text-end">{{ r['quantity'] }}</td>
+              <td class="text-end">{{ r['unit_price']|money }}</td>
+              <td class="text-end">{{ r['total_value']|money }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="7" class="text-center text-muted py-4">No data</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="card border-0 shadow-sm">
+      <div class="card-header bg-card">
+        <i class="fa-solid fa-chart-line me-2"></i> Daily, Cumulative & Running Avg
+      </div>
+      <div class="table-responsive">
+        <table class="table table-sm table-striped table-bordered align-middle mb-0 table-reports">
+          <thead class="table-light">
+            <tr>
+              <th>Date</th>
+              <th class="text-end">Daily</th>
+              <th class="text-end">Cumulative</th>
+              <th class="text-end">Running Average (±1 day)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in cumulative %}
+            <tr>
+              <td>{{ r['date'] }}</td>
+              <td class="text-end">{{ r['daily_purchase']|money }}</td>
+              <td class="text-end">{{ r['cumulative_purchase']|money }}</td>
+              <td class="text-end">{{ r['running_average']|money }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="4" class="text-center text-muted py-4">No data</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
