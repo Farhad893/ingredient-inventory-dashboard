@@ -315,4 +315,4 @@ print("Static folder:", STATIC_DIR)
 
 if __name__ == "__main__":
     init_db(seed=True)
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=False)
