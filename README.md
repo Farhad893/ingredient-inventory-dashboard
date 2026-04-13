@@ -28,7 +28,7 @@ Bootstrap UI
 
 ### Install & run
 ```bash
-git clone https://github.com/Farhad893/ingredient-inventory-dashboard
+git clone https://github.com/yourfolder/ingredient-inventory-dashboard
 cd ingredient-inventory-dashboard
 pip install -r requirements.txt
 python app.py
@@ -37,7 +37,7 @@ pip install flask
 python app.py
 ```
 
-Open your browser at: **http://127.0.0.1:5000**
+Open your browser at: **http://0.0.0.0:5000**
 
 > The app auto-creates the SQLite DB and **seeds 12 rows** on first run.
 
